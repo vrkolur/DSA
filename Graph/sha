@@ -1,0 +1,85 @@
+	public static void main(String[] args)
+	{
+		int v = 9;
+		ArrayList<ArrayList<AdjListNode>> graph
+			= new ArrayList<>();
+		for (int i = 0; i < v; i++) {
+			graph.add(new ArrayList<>());
+		}
+		int source = 0;
+		graph.get(0).add(new AdjListNode(1, 4));
+		graph.get(0).add(new AdjListNode(7, 8));
+		graph.get(1).add(new AdjListNode(2, 8));
+		graph.get(1).add(new AdjListNode(7, 11));
+		graph.get(1).add(new AdjListNode(0, 7));
+		graph.get(2).add(new AdjListNode(1, 8));
+		graph.get(2).add(new AdjListNode(3, 7));
+		graph.get(2).add(new AdjListNode(8, 2));
+		graph.get(2).add(new AdjListNode(5, 4));
+		graph.get(3).add(new AdjListNode(2, 7));
+		graph.get(3).add(new AdjListNode(4, 9));
+		graph.get(3).add(new AdjListNode(5, 14));
+		graph.get(4).add(new AdjListNode(3, 9));
+		graph.get(4).add(new AdjListNode(5, 10));
+		graph.get(5).add(new AdjListNode(4, 10));
+		graph.get(5).add(new AdjListNode(6, 2));
+		graph.get(6).add(new AdjListNode(5, 2));
+		graph.get(6).add(new AdjListNode(7, 1));
+		graph.get(6).add(new AdjListNode(8, 6));
+		graph.get(7).add(new AdjListNode(0, 8));
+		graph.get(7).add(new AdjListNode(1, 11));
+		graph.get(7).add(new AdjListNode(6, 1));
+		graph.get(7).add(new AdjListNode(8, 7));
+		graph.get(8).add(new AdjListNode(2, 2));
+		graph.get(8).add(new AdjListNode(6, 6));
+		graph.get(8).add(new AdjListNode(7, 1));
+	}
+}
+
+
+class Solution {
+    public int countSubIslands(int[][] grid1, int[][] grid2) {
+        int n=grid2.length;
+        int m=grid2[0].length;
+
+        int delRow[]={1,-1,0,0};
+        int delCol[]={0,0,1,-1};
+
+        int sub=0;
+        for(int i=0;i<n;i++){
+            boolean[] flag={true};
+            for(int j=0;j<m;j++){
+                
+                if(grid2[i][j]==1){
+                    dfs(i,j,grid1,grid2,flag,delRow,delCol);
+                    if(flag[0]) sub++;
+                    flag[0]=true;
+                }
+            }
+        }
+        return sub;
+    }
+
+    public void dfs(int i,int j,int[][] grid1, int[][] grid2,boolean[] flag,int delRow[],int delCol[]){
+        
+        if(grid1[i][j]==0) {
+            flag[0]=false;
+            return;
+        }
+
+        grid2[i][j]=0;
+        int n=grid2.length;
+        int m=grid2[0].length;
+
+        for(int k=0;k<4;k++){
+            int nrow=i+delRow[k];
+            int ncol=j+delCol[k];
+
+            if(nrow<n && ncol<m && nrow>=0 && ncol>=0 && grid2[nrow][ncol]==1){
+                dfs(nrow,ncol,grid1,grid2,flag,delRow,delCol);
+            }
+  
+
+        }
+    }
+}
