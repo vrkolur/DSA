@@ -35,13 +35,13 @@ public class Pascle_Triangle {
     }
     
     // 3. given numRows print the entire triangle.
-    private List<List<Integer>> pascle3(int n) {
+    // private List<List<Integer>> pascle3(int n) {
         
-    }
+    // }
 
     public static void main(String[] args) {
         Pascle_Triangle ob = new Pascle_Triangle();
-        int numRows = 6;
+        // int numRows = 6;
         System.out.println(ob.pascle1(11, 6));
         System.out.println(ob.pascle2(3));
     }
